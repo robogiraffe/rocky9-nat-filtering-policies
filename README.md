@@ -2,12 +2,15 @@
 
 Configuring NAT and zone-based traffic filtering (LAN ↔ WAN) with firewalld
 
+As of Rocky Linux 9, iptables and its associated utilities are deprecated, meaning they are no longer recommended for use and may be removed in future releases. Firewalld is the preferred tool for managing firewall rules and network traffic.
+
 ## NAT and Traffic Filtering Between LAN and WAN on Rocky Linux 9 with firewalld
-## The Problem  
+
+### The Problem  
 
 You set up a Rocky Linux 9 server with two interfaces (for example):
 
-- **ens33 (WAN)** – connected to the internet (`192.168.122.2/24`),  
+- **ens33 (WAN)** – connected to the internet (`192.168.122.2/24`),
 - **ens34 (LAN)** – connected to the local network (`192.168.123.2/24`). 
 
 The goal is simple: enable NAT so that clients on the LAN can reach the internet through this server.
@@ -20,7 +23,7 @@ When trying to **ping 8.8.8.8** from the LAN side, the response is: **Packet fil
 
 The NAT is working, but the traffic is blocked between zones.
 
-## The Fix
+### The Fix
 
 Starting with Rocky Linux 9, firewalld enforces stricter zone separation.
 Even with masquerading enabled, packets will not pass between zones unless you explicitly allow it.
